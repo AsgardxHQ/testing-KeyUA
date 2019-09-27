@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Test payment</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Open+Sans%3A300%2C300italic%2C400%2C400italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic&amp;v1&amp;subset=latin%2Clatin-ext"
+      media="screen"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/tiny-slider.css"
+    />
+    <!--[if (lt IE 9)
+      ]><script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.helper.ie8.js"></script
+    ><![endif]-->
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <a href="index.html"
+          ><img src="https://img.icons8.com/dusk/64/000000/warface-logo.png" />
+          L O G O</a
+        >
+      </div>
+      <div class="right-nav">
+        <a href="#">Edit details in your cover letter</a>
+      </div>
+    </header>
+    <div class="container-fluid">
+      <div class="container">
+        <div class="header">
+          <h1>
+            Your profile is ready. Get your personalized cover letter now for
+            less than the price of cup of coffee and omprove your career.
+          </h1>
+        </div>
+        <div class="wrapper">
+          <section class="row" id="app">
+            <div class="col-8">
+              <div class="row" v-if="show">
+                <div class="col-6">
+                  <div class="block special">
+                    <div class="block-wrapper">
+                      <div class="block-head">
+                        Limited summer offer
+                        <span class="timer">
+                          <ul class="countdown">
+                            <li>
+                              <span class="days">00</span>
+                              <span class="days_ref"></span>
+                            </li>
+                            <li class="seporator">:</li>
+                            <li>
+                              <span class="hours">00</span>
+                              <span class="hours_ref"></span>
+                            </li>
+                            <li class="seporator">:</li>
+                            <li>
+                              <span class="minutes">00</span>
+                              <span class="minutes_ref"></span>
+                            </li>
+                            <li class="seporator">:</li>
+                            <li>
+                              <span class="seconds">00</span>
+                              <span class="seconds_ref"></span>
+                            </li>
+                          </ul>
+                        </span>
+                      </div>
+                      <div class="block-body">
+                        <div class="image">
+                          <img
+                            src="https://img.icons8.com/dusk/64/000000/low-price.png"
+                          />
+                        </div>
+                        <div class="desc">
+                          <ul>
+                            <li class="name">Trial</li>
+                            <li><small>The first week only for</small></li>
+                            <li class="price">$0.99</li>
+                            <li>
+                              <small
+                                >Rebills at $8.99 per month after your trial is
+                                completed.</small
+                              >
+                            </li>
+                          </ul>
+                          <button
+                            class="btn btn-buy"
+                            @click.prevent="changePayment(0)"
+                          >
+                            Get started
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="block">
+                    <div class="block-wrapper">
+                      <div class="block-head"></div>
+                      <div class="block-body">
+                        <div class="image">
+                          <img
+                            src="https://img.icons8.com/dusk/64/000000/expensive-2.png"
+                          />
+                        </div>
+                        <div class="desc">
+                          <ul>
+                            <li class="name">Annual plan</li>
+                            <li></li>
+                            <li class="price">$39.00 <small>/ year</small></li>
+                            <li>
+                              <small
+                                >Your premium plan will auto-renew. Cencel any
+                                time.</small
+                              >
+                            </li>
+                          </ul>
+                          <button
+                            class="btn btn-buy"
+                            @click.prevent="changePayment(1)"
+                          >
+                            Get started
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" v-else>
+                <div class="col-12">
+                  <div
+                    class="block payment"
+                    :class="{special: currentItem.special}"
+                  >
+                    <div class="block-head">
+                      {{ currentItem.special_text }}
+                      <span class="timer" v-if="currentItem.timer">
+                        <ul class="countdown">
+                          <li>
+                            <span class="days">00</span>
+                            <span class="days_ref"></span>
+                          </li>
+                          <li class="seporator">:</li>
+                          <li>
+                            <span class="hours">00</span>
+                            <span class="hours_ref"></span>
+                          </li>
+                          <li class="seporator">:</li>
+                          <li>
+                            <span class="minutes">00</span>
+                            <span class="minutes_ref"></span>
+                          </li>
+                          <li class="seporator">:</li>
+                          <li>
+                            <span class="seconds">00</span>
+                            <span class="seconds_ref"></span>
+                          </li>
+                        </ul>
+                      </span>
+                    </div>
+                    <div class="sub-head">
+                      <div class="image">
+                        <img :src="currentItem.image" />
+                      </div>
+                      <div class="info">
+                        <p class="name">{{ currentItem.name }}</p>
+                        <small
+                          >The first week only for
+                          <span class="price">{{
+                            currentItem.price
+                          }}</span></small
+                        >
+                        <small class="desc">{{ currentItem.desc }}</small>
+                      </div>
+                      <button class="btn btn-buy" @click.prevent="returnStep()">Charge</button>
+                    </div>
+                    <div class="block-body">
+                      <ul class="payment-types">
+                        <li>
+                          <img
+                            src="https://img.icons8.com/ios/50/000000/visa.png"
+                          />
+                        </li>
+                        <li>
+                          <img
+                            src="https://img.icons8.com/ios-filled/50/000000/mastercard.png"
+                          />
+                        </li>
+                        <li>
+                          <img
+                            src="https://img.icons8.com/ios/50/000000/discover.png"
+                          />
+                        </li>
+                        <li>
+                          <img
+                            src="https://img.icons8.com/windows/100/000000/amex.png"
+                          />
+                        </li>
+                      </ul>
+                      <form action="#" method="POST"  @submit.prevent="sendForm()">
+                        <div class="form-section">
+                          <div class="form-group">
+                            <label>
+                              Card number
+                            </label>
+                            <input
+                            :class="{error: form.card.err}"
+                              type="text"
+                              placeholder="Enter card number"
+                              v-model="form.card.data"
+                              maxlength="19"
+                              pattern="\d*"
+                            />
+                            <small class="text-danger" v-if="form.card.err">Minimum length 12</small>
+                          </div>
+                          <div class="form-group">
+                            <div class="group">
+                              <div>
+                              <label> Exp. month</label>
+                              <select :class="{error: form.month.err}" v-model="form.month.data">
+                                <option value="Month">Month</option>
+                                <option value="Sep">Sep</option>
+                                <option value="Oct">Oct</option>
+                                <option value="Now">Now</option>
+                                <option value="Dec">Dec</option>
+                                <option value="Jan">Jan</option>
+                              </select>
+                              </div>
+                              <span class="seporator">/</span>
+                              <div>
+                              <label> Exp. year</label>
+                              <select :class="{error: form.year.err}" v-model="form.year.data">
+                                <option value="Year">Year</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                              </select>
+                              </div>
+                            </div>
+                            <small class="text-danger" v-if="form.month.err || form.year.err">You entered incorrect data</small>
+                          </div>
+                        </div>
+                        <div class="form-section">
+                          <div class="form-group">
+                            <label> Cardholder First Name</label>
+                            <input :class="{error: form.firstName.err}" v-model="form.firstName.data" type="text" placeholder="Enter First Name" />
+                            <small class="text-danger" v-if="form.firstName.err">Cannot be empty</small>
+                          </div>
+                          <div class="form-group">
+                            <label> Cardholder Last Name</label>
+                            <input :class="{error: form.lastName.err}" v-model="form.lastName.data" type="text" placeholder="Enter Last Name" />
+                            <small class="text-danger" v-if="form.lastName.err">Cannot be empty</small>
+                          </div>
+                        </div>
+                        <div class="form-group btn-payment">
+                          <button class="btn btn-buy">Confirm</button>
+                          <span><img src="https://img.icons8.com/carbon-copy/20/000000/lock--v2.png"> Secure credit card payment</span>
+                        </div>
+                        <div class="payment-info">
+                          <p>
+                            Your card will automatically attached to your profile,
+                            you can remove it any time.
+                          </p>
+                          <p>
+                            By clicking "Confirm" you agree to the
+                            <a href="#">Terms & Conditions</a>
+                          </p>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="block-info">
+                <div class="head">
+                  <span>Best price guaranteed</span>
+                </div>
+                <div class="block-desc">
+                  <p>Your plan will include:</p>
+                  <ul>
+                    <li>Unlimited Cover Letters</li>
+                    <li>50+ custom templates</li>
+                    <li>Creative design</li>
+                    <li>Custom backgrounds</li>
+                    <li>More than 15 color schemes</li>
+                    <li>Create multiple versions</li>
+                    <li>Custom sections</li>
+                    <li>Ultimited PDF downloads</li>
+                    <li>Email sharing</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div class="slick">
+              <div class="col-6">
+                <div class="comment row">
+                  <div class="col-3">
+                    <a href="#" class="avatar">
+                      <img
+                        src="https://img.icons8.com/cotton/100/000000/user.png"
+                      />
+                    </a>
+                  </div>
+                  <div class="col-9">
+                    <div class="comment-name"><a href="#">Name user</a></div>
+                    <div class="comment-desc">
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat. Duis aute irure dolor in
+                        reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="comment row">
+                  <div class="col-3">
+                    <a href="#" class="avatar">
+                      <img
+                        src="https://img.icons8.com/cotton/100/000000/user.png"
+                      />
+                    </a>
+                  </div>
+                  <div class="col-9">
+                    <div class="comment-name"><a href="#">Name user</a></div>
+                    <div class="comment-desc">
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat. Duis aute irure dolor in
+                        reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="comment row">
+                  <div class="col-3">
+                    <a href="#" class="avatar">
+                      <img
+                        src="https://img.icons8.com/cotton/100/000000/user.png"
+                      />
+                    </a>
+                  </div>
+                  <div class="col-9">
+                    <div class="comment-name"><a href="#">Name user</a></div>
+                    <div class="comment-desc">
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat. Duis aute irure dolor in
+                        reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="comment row">
+                  <div class="col-3">
+                    <a href="#" class="avatar">
+                      <img
+                        src="https://img.icons8.com/cotton/100/000000/user.png"
+                      />
+                    </a>
+                  </div>
+                  <div class="col-9">
+                    <div class="comment-name"><a href="#">Name user</a></div>
+                    <div class="comment-desc">
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat. Duis aute irure dolor in
+                        reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="row">
+        <div class="col-4">
+          <div class="brand">
+            <a href="index.html"
+              ><img
+                src="https://img.icons8.com/dusk/64/000000/warface-logo.png"
+              />
+              L O G O</a
+            >
+          </div>
+        </div>
+        <div class="col-4">
+          <ul>
+            <li><a href="#">Private Police</a></li>
+            <li class="seporator">|</li>
+            <li><a href="#">Term of Use</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-reserved">
+        <span>&copy; 2019, Example. All rights reserved.</span>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

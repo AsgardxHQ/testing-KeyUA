@@ -1,0 +1,423 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans";
+  letter-spacing: 1px;
+}
+a {
+  text-decoration: none;
+  color: #333;
+}
+section {
+  margin-bottom: 30px;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.5);
+  padding: 0 15px;
+}
+header a {
+  color: #3d8f85;
+  font-weight: bold;
+}
+.brand a {
+  font-size: 24px;
+  align-items: center;
+  display: flex;
+}
+.brand img {
+  width: 50px;
+  margin-right: 10px;
+}
+header .right-nav a {
+  border-bottom: 2px solid #3d8f85;
+}
+.container-fluid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  width: 60%;
+}
+.header h1 {
+  text-align: center;
+  font-size: 24px;
+  color: #363636;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.col-3 {
+  width: calc(100% / 4);
+}
+.col-4 {
+  width: calc(100% / 3);
+}
+.col-6 {
+  width: 50%;
+}
+.col-8 {
+  width: calc(100% / 1.5);
+}
+.col-9 {
+  width: 75%;
+}
+.col-12 {
+  width: 100%;
+}
+.block {
+  padding: 0 15px;
+}
+.block > .block-wrapper {
+  border-radius: 5px;
+  border: 1px solid #c1c1c1;
+}
+.block .block-head {
+  min-height: 50px;
+  padding: 5px;
+}
+.block .block-body {
+  padding: 10px;
+}
+.block .block-body .image {
+  text-align: center;
+}
+.block .block-body ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.block .block-body ul li {
+  min-height: 25px;
+}
+.block .block-body .name {
+  font-weight: bold;
+  color: #363636;
+}
+.block .block-body ul li small {
+  font-size: 11px;
+  color: #727272;
+}
+.block .block-body ul .price {
+  color: #3d8f85;
+  font-weight: bold;
+  font-size: 18px;
+}
+.block .btn-buy {
+  width: 100%;
+  background: #e24c2c;
+  border: 1px solid #e24c2c;
+  padding: 10px 0;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: background 0.5s;
+}
+.block .btn-buy:hover {
+  background: #fff;
+  color: #e24c2c;
+}
+.special .block-wrapper {
+  border: 2px solid #3d8f85;
+}
+.special .block-head {
+  background: #3d8f85;
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.block-info .head {
+  background: #3d8f85;
+  color: #fff;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+}
+.block-info .head span {
+  position: relative;
+}
+.block-info .head span:before {
+  content: "";
+  background-image: url("../icons/star.svg");
+  width: 10px;
+  height: 10px;
+  background-size: 100%;
+  position: absolute;
+  top: 5px;
+  left: -15px;
+}
+.block-info .head span:after {
+  content: "";
+  background-image: url("../icons/star.svg");
+  width: 10px;
+  height: 10px;
+  background-size: 100%;
+  position: absolute;
+  top: 5px;
+  right: -15px;
+}
+.block-info .block-desc p {
+  font-weight: bold;
+  font-size: 13px;
+  color: #363636;
+  text-align: center;
+}
+.block-info .block-desc ul {
+  font-size: 10px;
+  color: #727272;
+  list-style-image: url("../icons/ok.svg");
+  list-style-position: outside;
+  font-weight: 400;
+}
+.block-info .block-desc ul li {
+  line-height: 2.5;
+}
+
+/*Блок оплаты*/
+.payment .block-head {
+  border-radius: 5px 5px 0 0;
+}
+.payment .block-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+.block-body .payment-types {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+.block-body .payment-types li {
+  padding: 0 15px;
+}
+.block-body .payment-types img {
+  width: 50px;
+}
+.sub-head {
+  border: 1px solid #eee;
+  border-top: 0;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sub-head .name {
+  font-weight: bold;
+  font-size: 16px;
+  margin: 0;
+}
+.sub-head .image {
+  margin-right: 15px;
+}
+.sub-head .price {
+  font-weight: bold;
+  font-size: 16px;
+  color: #3d8f85;
+}
+.sub-head small {
+  display: block;
+  font-size: 11px;
+  color: #727272;
+}
+.sub-head .btn-buy {
+  width: auto;
+  padding: 10px 25px;
+  background: none;
+  color: #3d8f85;
+  border-color: #3d8f85;
+  border-width: 2px;
+}
+.sub-head .btn-buy:hover {
+  background: #3d8f85;
+  color: #fff;
+}
+.payment .block-body .form-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.payment .block-body .seporator {
+  margin: 30px 15px 0 15px;
+}
+.payment .block-body label {
+  font-size: 13px;
+  color: #727272;
+}
+.payment .block-body .form-section .form-group {
+  padding: 0 10px;
+}
+.payment .block-body .form-group .group{
+    display:flex;
+    justify-content: space-evenly;
+}
+.payment .block-body input,
+.payment .block-body select {
+  padding: 10px 10px;
+  font-size: 16px;
+  color: #727272;
+  border-radius: 5px;
+  border: 1px solid #c1c1c1;
+  display: block;
+}
+.payment .error{
+    border-color:#e24c2c !important;
+}
+.payment .text-danger{
+    color:#e24c2c;
+    font-size:11px;
+}
+.payment .block-body .btn-buy{
+    width: auto;
+    padding: 10px 25px;
+}
+.payment .btn-payment{
+    margin-bottom:15px;
+    padding:0 10px;
+    display:flex;
+    align-items: center;
+    margin-top:15px;
+}
+.payment .btn-payment .btn-buy{
+    margin:0 15px 0 0;
+}
+.payment .btn-payment span{
+    font-size:13px;
+    color:#727272;
+    display:flex;
+    align-items: center;
+}
+.payment-info{
+    margin-top:15px;
+}
+.payment-info p{
+    margin:0;
+    padding:0 10px;
+    font-size:10px;
+    color:#727272;
+}
+.payment-info a{
+    text-decoration: underline;
+}
+
+/*//Блок оплаты*/
+/*Таймер*/
+.special .block-head .timer {
+  display: block;
+  font-size: 16px;
+  opacity: 0.75;
+  margin-top: 5px;
+}
+.timer .countdown {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+.timer .countdown li {
+  font-size: 12px;
+}
+.timer .countdown li:not(.seporator) {
+  padding: 0 5px;
+}
+.timer .countdown li span {
+  text-transform: lowercase;
+}
+/*//Таймен*/
+/*Блок комментарий*/
+.comment .avatar {
+  overflow: hidden;
+  display: block;
+  padding: 5px;
+}
+.comment .avatar img {
+  border-radius: 50%;
+  border: 1px solid #eee;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+.comment .comment-name a {
+  font-size: 13px;
+  font-weight: bold;
+}
+.comment .comment-desc {
+  font-size: 10px;
+  color: #727272;
+}
+/*//Блок комментарий*/
+/*Подвал сайта*/
+footer {
+  background: #2a1818;
+}
+footer > .row {
+  border-bottom: 1px solid #727272;
+}
+footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+footer ul li a {
+  padding: 0 15px;
+  display: block;
+  color: #c5c4c4;
+  font-size: 13px;
+  font-weight: 100;
+}
+footer .seporator {
+  color: #c5c4c4;
+  font-weight: 100;
+}
+footer .brand {
+  margin: 10px;
+}
+footer .brand a {
+  color: #c5c4c4;
+  font-weight: bold;
+}
+footer .footer-reserved {
+  text-align: center;
+  color: #c5c4c4;
+  font-size: 13px;
+  padding: 15px 0;
+}
+/*//Подвал сайта*/
+/*Slick*/
+.tns-nav {
+  text-align: center;
+}
+.tns-nav button {
+  border-radius: 50%;
+  background: 0;
+  border: 1px solid #3d8f85;
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  margin: 0 2px;
+  outline: none;
+}
+.tns-nav button.tns-nav-active {
+  background: #3d8f85;
+}
+/*//Slick*/
