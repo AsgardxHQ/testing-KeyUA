@@ -18,6 +18,7 @@
       ]><script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.helper.ie8.js"></script
     ><![endif]-->
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
   </head>
   <body>
     <header>
@@ -51,23 +52,23 @@
                         <span class="timer">
                           <ul class="countdown">
                             <li>
-                              <span class="days">00</span>
-                              <span class="days_ref"></span>
+                              <span class="days">{{ days | two_digits }}</span>
+                              <span class="days_ref">D</span>
                             </li>
                             <li class="seporator">:</li>
                             <li>
-                              <span class="hours">00</span>
-                              <span class="hours_ref"></span>
+                              <span class="hours">{{ hours | two_digits }}</span>
+                              <span class="hours_ref">h</span>
                             </li>
                             <li class="seporator">:</li>
                             <li>
-                              <span class="minutes">00</span>
-                              <span class="minutes_ref"></span>
+                              <span class="minutes">{{ minutes | two_digits }}</span>
+                              <span class="minutes_ref">m</span>
                             </li>
                             <li class="seporator">:</li>
                             <li>
-                              <span class="seconds">00</span>
-                              <span class="seconds_ref"></span>
+                              <span class="seconds">{{ seconds | two_digits }}</span>
+                              <span class="seconds_ref">s</span>
                             </li>
                           </ul>
                         </span>
@@ -146,23 +147,23 @@
                       <span class="timer" v-if="currentItem.timer">
                         <ul class="countdown">
                           <li>
-                            <span class="days">00</span>
-                            <span class="days_ref"></span>
+                            <span class="days">{{ days | two_digits }}</span>
+                            <span class="days_ref">D</span>
                           </li>
                           <li class="seporator">:</li>
                           <li>
-                            <span class="hours">00</span>
-                            <span class="hours_ref"></span>
+                            <span class="hours">{{ hours | two_digits }}</span>
+                            <span class="hours_ref">h</span>
                           </li>
                           <li class="seporator">:</li>
                           <li>
-                            <span class="minutes">00</span>
-                            <span class="minutes_ref"></span>
+                            <span class="minutes">{{ minutes | two_digits }}</span>
+                            <span class="minutes_ref">m</span>
                           </li>
                           <li class="seporator">:</li>
                           <li>
-                            <span class="seconds">00</span>
-                            <span class="seconds_ref"></span>
+                            <span class="seconds">{{ seconds | two_digits }}</span>
+                            <span class="seconds_ref">s</span>
                           </li>
                         </ul>
                       </span>

@@ -3,82 +3,55 @@ let slider = tns({
   items: 2,
   controls: false,
   navPosition: "bottom",
-  mouseDrag: true
-});
-Element.prototype.asTimer = function(obj) {
-  let seconds = obj.seconds;
-  let asInterval = setInterval(timer, 1000);
-  let _this = this;
-  function timer() {
-    let days = Math.floor(seconds / 24 / 60 / 60);
-    let hoursLeft = Math.floor(seconds - days * 86400);
-    let hours = Math.floor(hoursLeft / 3600);
-    let minutesLeft = Math.floor(hoursLeft - hours * 3600);
-    let minutes = Math.floor(minutesLeft / 60);
-    let remainingSeconds = seconds % 60;
-
-    let ref_days = declOfNum(["D", "D", "D"])(days);
-    let ref_hours = declOfNum(["h", "h", "h"])(hours);
-    let ref_minutes = declOfNum(["m", "m", "m"])(minutes);
-    let ref_seconds = declOfNum(["s", "s", "s"])(remainingSeconds);
-
-    if (hours < 10) {
-      hours = "0" + hours;
-    }
-    if (minutes < 10) {
-      minutes = "0" + minutes;
-    }
-    if (remainingSeconds < 10) {
-      remainingSeconds = "0" + remainingSeconds;
-    }
-    if (days != 0) {
-      _this.querySelector(".days").innerText = days;
-      _this.querySelector(".days_ref").innerText = ref_days;
-    } else {
-      _this.querySelector(".days").innerText = "";
-      _this.querySelector(".days_ref").innerText = "";
-    }
-    _this.querySelector(".hours").innerText = hours;
-    _this.querySelector(".minutes").innerText = minutes;
-    _this.querySelector(".seconds").innerText = remainingSeconds;
-
-    _this.querySelector(".hours_ref").innerText = ref_hours;
-    _this.querySelector(".minutes_ref").innerText = ref_minutes;
-    _this.querySelector(".seconds_ref").innerText = ref_seconds;
-    if (seconds == 0) {
-      clearInterval(asInterval);
-      document.getElementById("countdown").innerHTML = "Completed";
-    } else {
-      seconds--;
+  mouseDrag: true,
+  responsive: {
+    789: {
+      edgePadding: 20,
+      gutter: 20,
+      items: 2
+    },
+    414: {
+      items: 1
     }
   }
-};
+});
 
-let declOfNum = (function() {
-  let cases = [2, 0, 1, 1, 1, 2];
-  let declOfNumSubFunction = function(titles, number) {
-    number = Math.abs(number);
-    return titles[
-      number % 100 > 4 && number % 100 < 20
-        ? 2
-        : cases[number % 10 < 5 ? number % 10 : 5]
-    ];
-  };
-  return function(_titles) {
-    if (arguments.length === 1) {
-      return function(_number) {
-        return declOfNumSubFunction(_titles, _number);
-      };
-    } else {
-      return declOfNumSubFunction.apply(null, arguments);
+Vue.filter('two_digits', function (value) {
+    if(value.toString().length <= 1)
+    {
+        return "0"+value.toString();
     }
-  };
-})();
+    return value.toString();
+});
 
 var app = new Vue({
   el: "#app",
+  computed:{
+    seconds() {
+        return (this.date - this.now) % 60;
+    },
+
+    minutes() {
+        return Math.trunc((this.date - this.now) / 60) % 60;
+    },
+
+    hours() {
+        return Math.trunc((this.date - this.now) / 60 / 60) % 24;
+    },
+
+    days() {
+        return Math.trunc((this.date - this.now) / 60 / 60 / 24);
+    }
+  },
+  created(){
+    window.setInterval(() => {
+        this.now = Math.trunc((new Date()).getTime() / 1000);
+    },1000);
+  },
   data() {
     return {
+      now: Math.trunc((new Date()).getTime() / 1000),
+      date : Math.trunc((new Date().getTime() / 1000 + 172800)),
       currentItem: null,
       show: true,
       items: [{
@@ -120,6 +93,7 @@ var app = new Vue({
     returnStep(){
       this.currentItem = null;
       this.show = !this.show;
+      this.form = clearForm();
     },
     sendForm(){
       if(this.form.card.data === null || this.form.card.data.length < 12) this.form.card.err = true;
@@ -142,18 +116,16 @@ var app = new Vue({
     }
   },
   mounted() {
-    document.querySelector(".countdown").asTimer({
-      seconds: 172800
-    });
+    
   }
 });
 
 function clearForm(){
   return {
-    card: {data: null, err: null},
-    month: {data: "Month", err: null},
-    year: {data: "Year", err: null},
-    firstName: {data:null, err:null},
-    lastName: {data:null, err:null},
+    card: {data: null, err: false},
+    month: {data: "Month", err: false},
+    year: {data: "Year", err: false},
+    firstName: {data:null, err:false},
+    lastName: {data:null, err:false},
   }
 }
